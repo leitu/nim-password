@@ -5,8 +5,7 @@ author        = "Lei Tu"
 description   = "generate password"
 license       = "MIT"
 srcDir        = "src"
-bin           = @["nim_password"]
-
+bin           = @['nim-password']
 # Dependencies
 
 requires "nim >= 0.18.1"
