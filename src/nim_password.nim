@@ -1,4 +1,4 @@
-import random, sequtils
+import os, random, sequtils, parseopt, strutils
 
 randomize()
 
@@ -19,4 +19,25 @@ proc generate*(length: int, strong: bool): untyped=
 
   echo password
 
-generate(16, true)
+proc main =
+
+  for kind, key, value in getOpt():
+    case kind
+    of cmdArgument:
+      discard
+ 
+    of cmdLongOption, cmdShortOption:
+      case key
+      of "v":
+        echo "version 1"
+      of "h":
+        echo getAppFilename().extractFilename() & "with -s=numbers has strong encrypte"
+      of "s":
+        generate(parseInt(value), true)
+      else:
+        generate(parseInt(value), false)
+ 
+    of cmdEnd:
+      discard
+
+main()
