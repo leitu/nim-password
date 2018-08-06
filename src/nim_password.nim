@@ -19,8 +19,7 @@ proc generate*(length: int, strong: bool): untyped=
 
   echo password
 
-proc main =
-
+when isMainModule:
   for kind, key, value in getOpt():
     case kind
     of cmdArgument:
@@ -34,10 +33,8 @@ proc main =
         echo getAppFilename().extractFilename() & "with -s=numbers has strong encrypte"
       of "s":
         generate(parseInt(value), true)
-      else:
+      of "x":
         generate(parseInt(value), false)
  
     of cmdEnd:
       discard
-
-main()
