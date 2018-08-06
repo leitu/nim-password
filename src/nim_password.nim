@@ -19,22 +19,27 @@ proc generate*(length: int, strong: bool): untyped=
 
   echo password
 
+proc writeHelp() =
+  echo getAppFilename().extractFilename() & "with numbers and -s has strong encrypte"
+  echo "eg: " & getAppFilename().extractFilename() & "16 -s"
+  echo "eg: " & getAppFilename().extractFilename() & " 16"
+
+proc main() =
+  var strong = false
+  case paramCount():
+    of 1:
+      var numbers = parseInt(commandLineParams()[0])
+      generate(numbers, strong)
+    of 2:
+      var numbers = parseInt(commandLineParams()[0])
+      if commandLineParams()[1] == "-s":
+        strong = true
+        generate(numbers, strong)
+      else:
+        writeHelp()
+        quit 1
+    else:
+      writeHelp()
+
 when isMainModule:
-  for kind, key, value in getOpt():
-    case kind
-    of cmdArgument:
-      discard
- 
-    of cmdLongOption, cmdShortOption:
-      case key
-      of "v":
-        echo "version 1"
-      of "h":
-        echo getAppFilename().extractFilename() & "with -s=numbers has strong encrypte"
-      of "s":
-        generate(parseInt(value), true)
-      of "x":
-        generate(parseInt(value), false)
- 
-    of cmdEnd:
-      discard
+  main()
