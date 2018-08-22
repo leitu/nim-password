@@ -21,7 +21,7 @@ proc generate*(length: int, strong: bool): untyped=
 
 proc writeHelp() =
   echo getAppFilename().extractFilename() & "with numbers and -s has strong encrypte"
-  echo "eg: " & getAppFilename().extractFilename() & "16 -s"
+  echo "eg: " & getAppFilename().extractFilename() & " 16 -s"
   echo "eg: " & getAppFilename().extractFilename() & " 16"
 
 proc main() =
